@@ -2,16 +2,18 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { SelectControl, PanelBody, RangeControl, Spinner } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
+import { Fragment } from '@wordpress/element';
 
 export default function Edit({ attributes, setAttributes }) {
     const blockProps = useBlockProps();
 
+    // Post type options
     const postTypes = [
         { label: __('Post', 'grid-master'), value: 'post' },
         { label: __('Page', 'grid-master'), value: 'page' },
     ];
 
-    // Fetch posts/pages
+    // Fetch posts or pages dynamically based on selected type
     const items = useSelect(
         (select) => {
             const type = attributes.postType || 'post';
@@ -35,7 +37,7 @@ export default function Edit({ attributes, setAttributes }) {
     const displayedItems = allItems.slice(0, numberOfItems);
 
     return (
-        <>
+        <Fragment>
             <InspectorControls>
                 <PanelBody title={__('Settings', 'grid-master')}>
                     <SelectControl
@@ -65,6 +67,6 @@ export default function Edit({ attributes, setAttributes }) {
                     <p>{__('No items to display', 'grid-master')}</p>
                 ) : null}
             </div>
-        </>
+        </Fragment>
     );
 }

@@ -10,17 +10,10 @@ return array(
 		'category' => 'widgets',
 		'icon' => 'smiley',
 		'description' => 'Grid Master block with post/page selection and range control.',
-		'example' => array(
-			
-		),
 		'attributes' => array(
 			'postType' => array(
 				'type' => 'string',
 				'default' => 'post'
-			),
-			'selectedId' => array(
-				'type' => 'number',
-				'default' => 0
 			),
 			'numberOfItems' => array(
 				'type' => 'number',
@@ -33,7 +26,6 @@ return array(
 		'textdomain' => 'grid-master',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
-		'style' => 'file:./style-index.css',
-		'viewScript' => 'file:./view.js'
+		'style' => 'file:./style-index.css'
 	)
 );
