@@ -50,36 +50,45 @@ function Edit({
     value: 'page'
   }];
 
-  // Get posts or pages dynamically
+  // Fetch posts/pages
   const items = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_3__.useSelect)(select => {
-    if (!attributes.postType) return [];
-    return select('core').getEntityRecords('postType', attributes.postType, {
+    const type = attributes.postType || 'post';
+    return select('core').getEntityRecords('postType', type, {
       per_page: -1
     });
   }, [attributes.postType]);
 
-  // Limit items based on numberOfItems
-  const displayedItems = items ? items.slice(0, attributes.numberOfItems) : [];
+  // Loading state
+  if (items === undefined) {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
+      ...blockProps,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Spinner, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+        children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Loading items...', 'grid-master')
+      })]
+    });
+  }
+  const allItems = items || [];
+  const numberOfItems = attributes.numberOfItems || allItems.length;
+  const displayedItems = allItems.slice(0, numberOfItems);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Settings', 'grid-master'),
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Select Type', 'grid-master'),
-          value: attributes.postType,
+          value: attributes.postType || 'post',
           options: postTypes,
           onChange: postType => setAttributes({
-            postType,
-            selectedId: 0
+            postType
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Number of Items', 'grid-master'),
-          value: attributes.numberOfItems,
+          value: attributes.numberOfItems || displayedItems.length,
           onChange: value => setAttributes({
             numberOfItems: value
           }),
           min: 1,
-          max: 20
+          max: allItems.length || 1
         })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
@@ -88,9 +97,9 @@ function Edit({
         children: displayedItems.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("li", {
           children: item.title.rendered
         }, item.id))
-      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
+      }) : allItems.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("p", {
         children: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('No items to display', 'grid-master')
-      })
+      }) : null
     })]
   });
 }

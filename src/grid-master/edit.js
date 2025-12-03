@@ -1,6 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { SelectControl, PanelBody, RangeControl } from '@wordpress/components';
+import { SelectControl, PanelBody, RangeControl, Spinner } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
 
 export default function Edit({ attributes, setAttributes }) {
@@ -11,17 +11,28 @@ export default function Edit({ attributes, setAttributes }) {
         { label: __('Page', 'grid-master'), value: 'page' },
     ];
 
-    // Get posts or pages dynamically
+    // Fetch posts/pages
     const items = useSelect(
         (select) => {
-            if (!attributes.postType) return [];
-            return select('core').getEntityRecords('postType', attributes.postType, { per_page: -1 });
+            const type = attributes.postType || 'post';
+            return select('core').getEntityRecords('postType', type, { per_page: -1 });
         },
         [attributes.postType]
     );
 
-    // Limit items based on numberOfItems
-    const displayedItems = items ? items.slice(0, attributes.numberOfItems) : [];
+    // Loading state
+    if (items === undefined) {
+        return (
+            <div {...blockProps}>
+                <Spinner />
+                <p>{__('Loading items...', 'grid-master')}</p>
+            </div>
+        );
+    }
+
+    const allItems = items || [];
+    const numberOfItems = attributes.numberOfItems || allItems.length;
+    const displayedItems = allItems.slice(0, numberOfItems);
 
     return (
         <>
@@ -29,16 +40,16 @@ export default function Edit({ attributes, setAttributes }) {
                 <PanelBody title={__('Settings', 'grid-master')}>
                     <SelectControl
                         label={__('Select Type', 'grid-master')}
-                        value={attributes.postType}
+                        value={attributes.postType || 'post'}
                         options={postTypes}
-                        onChange={(postType) => setAttributes({ postType, selectedId: 0 })}
+                        onChange={(postType) => setAttributes({ postType })}
                     />
                     <RangeControl
                         label={__('Number of Items', 'grid-master')}
-                        value={attributes.numberOfItems}
+                        value={attributes.numberOfItems || displayedItems.length}
                         onChange={(value) => setAttributes({ numberOfItems: value })}
                         min={1}
-                        max={20}
+                        max={allItems.length || 1}
                     />
                 </PanelBody>
             </InspectorControls>
@@ -50,9 +61,9 @@ export default function Edit({ attributes, setAttributes }) {
                             <li key={item.id}>{item.title.rendered}</li>
                         ))}
                     </ul>
-                ) : (
+                ) : allItems.length === 0 ? (
                     <p>{__('No items to display', 'grid-master')}</p>
-                )}
+                ) : null}
             </div>
         </>
     );

@@ -21,6 +21,7 @@ class Front {
 
         // Optional: debug path
         add_action( 'wp_head', [ $this, 'debug_path' ] );
+        add_action( 'init', [ $this, 'create_block_grid_master_block_init' ] );
     }
 
     /**
@@ -38,6 +39,25 @@ class Front {
      */
     public function debug_path() {
         var_dump( GRIDMASTER_PATH );
+    }
+
+    /**
+     * Register Gutenberg blocks
+     */
+    function create_block_grid_master_block_init() {
+        if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) {
+            wp_register_block_types_from_metadata_collection( GRIDMASTER_PATH . '/build', GRIDMASTER_PATH . '/build/blocks-manifest.php' );
+            return;
+        }
+
+        if ( function_exists( 'wp_register_block_metadata_collection' ) ) {
+            wp_register_block_metadata_collection( GRIDMASTER_PATH . '/build', GRIDMASTER_PATH . '/build/blocks-manifest.php' );
+        }
+
+        $manifest_data = require GRIDMASTER_PATH . '/build/blocks-manifest.php';
+        foreach ( array_keys( $manifest_data ) as $block_type ) {
+            register_block_type( GRIDMASTER_PATH . "/build/{$block_type}" );
+        }
     }
 
     
