@@ -38,11 +38,34 @@ final class GridMasterPlugin {
 		// Action link.
 		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'action_links' ) );
 
+		add_action( 'init', [ $this, 'create_block_grid_master_block_init' ] );
+
 		// Admin Functions.
 		if ( is_admin() ) {
 			$this->admin_init();
+		}else{
+			$this->front_init();
 		}
 	}
+
+	/**
+     * Register Gutenberg blocks
+     */
+    function create_block_grid_master_block_init() {
+        if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) {
+            wp_register_block_types_from_metadata_collection( GRIDMASTER_PATH . '/build', GRIDMASTER_PATH . '/build/blocks-manifest.php' );
+            return;
+        }
+
+        if ( function_exists( 'wp_register_block_metadata_collection' ) ) {
+            wp_register_block_metadata_collection( GRIDMASTER_PATH . '/build', GRIDMASTER_PATH . '/build/blocks-manifest.php' );
+        }
+
+        $manifest_data = require GRIDMASTER_PATH . '/build/blocks-manifest.php';
+        foreach ( array_keys( $manifest_data ) as $block_type ) {
+            register_block_type( GRIDMASTER_PATH . "/build/{$block_type}" );
+        }
+    }
 
 	/**
 	 * Initializes a singleton instance
@@ -85,6 +108,13 @@ final class GridMasterPlugin {
 			require_once GRIDMASTER_PATH . '/admin/Ajax.php';
 		}
 		$ajax = new GridMaster\Ajax();
+	}
+
+	public function front_init(){
+		if ( ! class_exists( 'GridMaster\Front' ) ) {
+			require_once GRIDMASTER_PATH . '/front/Front.php';
+		}
+		$gridmaster = GridMaster\Front::init();
 	}
 
 	/**
