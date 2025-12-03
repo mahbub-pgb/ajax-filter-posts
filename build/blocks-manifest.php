@@ -9,9 +9,23 @@ return array(
 		'title' => 'Grid Master',
 		'category' => 'widgets',
 		'icon' => 'smiley',
-		'description' => 'Example block scaffolded with Create Block tool.',
+		'description' => 'Grid Master block with post/page selection and range control.',
 		'example' => array(
 			
+		),
+		'attributes' => array(
+			'postType' => array(
+				'type' => 'string',
+				'default' => 'post'
+			),
+			'selectedId' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'numberOfItems' => array(
+				'type' => 'number',
+				'default' => 5
+			)
 		),
 		'supports' => array(
 			'html' => false

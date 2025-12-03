@@ -6,8 +6,22 @@
   "title": "Grid Master",
   "category": "widgets",
   "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
+  "description": "Grid Master block with post/page selection and range control.",
   "example": {},
+  "attributes": {
+    "postType": {
+      "type": "string",
+      "default": "post"
+    },
+    "selectedId": {
+      "type": "number",
+      "default": 0
+    },
+    "numberOfItems": {
+      "type": "number",
+      "default": 5
+    }
+  },
   "supports": {
     "html": false
   },

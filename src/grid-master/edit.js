@@ -1,38 +1,59 @@
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
 import { __ } from '@wordpress/i18n';
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { SelectControl, PanelBody, RangeControl } from '@wordpress/components';
+import { useSelect } from '@wordpress/data';
 
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-import { useBlockProps } from '@wordpress/block-editor';
+export default function Edit({ attributes, setAttributes }) {
+    const blockProps = useBlockProps();
 
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
-import './editor.scss';
+    const postTypes = [
+        { label: __('Post', 'grid-master'), value: 'post' },
+        { label: __('Page', 'grid-master'), value: 'page' },
+    ];
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @return {Element} Element to render.
- */
-export default function Edit() {
-	return (
-		<p { ...useBlockProps() }>
-			{ __( 'Grid Master – test!', 'grid-master' ) }
-		</p>
-	);
+    // Get posts or pages dynamically
+    const items = useSelect(
+        (select) => {
+            if (!attributes.postType) return [];
+            return select('core').getEntityRecords('postType', attributes.postType, { per_page: -1 });
+        },
+        [attributes.postType]
+    );
+
+    // Limit items based on numberOfItems
+    const displayedItems = items ? items.slice(0, attributes.numberOfItems) : [];
+
+    return (
+        <>
+            <InspectorControls>
+                <PanelBody title={__('Settings', 'grid-master')}>
+                    <SelectControl
+                        label={__('Select Type', 'grid-master')}
+                        value={attributes.postType}
+                        options={postTypes}
+                        onChange={(postType) => setAttributes({ postType, selectedId: 0 })}
+                    />
+                    <RangeControl
+                        label={__('Number of Items', 'grid-master')}
+                        value={attributes.numberOfItems}
+                        onChange={(value) => setAttributes({ numberOfItems: value })}
+                        min={1}
+                        max={20}
+                    />
+                </PanelBody>
+            </InspectorControls>
+
+            <div {...blockProps}>
+                {displayedItems.length > 0 ? (
+                    <ul>
+                        {displayedItems.map((item) => (
+                            <li key={item.id}>{item.title.rendered}</li>
+                        ))}
+                    </ul>
+                ) : (
+                    <p>{__('No items to display', 'grid-master')}</p>
+                )}
+            </div>
+        </>
+    );
 }
