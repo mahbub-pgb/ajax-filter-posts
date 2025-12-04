@@ -44,7 +44,7 @@ final class GridMasterPlugin {
 			$this->admin_init();
 		}
 		
-		$this->front_init();
+		$this->block_init();
 		
 	}
 
@@ -93,11 +93,13 @@ final class GridMasterPlugin {
 		$ajax = new GridMaster\Ajax();
 	}
 
-	public function front_init(){
-		if ( ! class_exists( 'GridMaster\Front' ) ) {
-			require_once GRIDMASTER_PATH . '/front/Front.php';
+	public function block_init(){
+		if ( ! class_exists( 'GridMaster\Blocks' ) ) {
+			require_once GRIDMASTER_PATH . '/inc/class-blocks.php';
 		}
-		$gridmaster = GridMaster\Front::init();
+		$blocks = GridMaster\Blocks::init();
+
+		
 	}
 
 	/**
