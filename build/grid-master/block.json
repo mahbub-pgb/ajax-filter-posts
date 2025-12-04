@@ -6,7 +6,7 @@
   "title": "Grid Master",
   "category": "widgets",
   "icon": "smiley",
-  "description": "Grid Master block with post/page selection and range control.",
+  "description": "Grid Master block with customizable card design for posts and pages.",
   "attributes": {
     "postType": {
       "type": "string",
@@ -14,7 +14,76 @@
     },
     "numberOfItems": {
       "type": "number",
-      "default": 5
+      "default": 6
+    },
+    "columns": {
+      "type": "number",
+      "default": 3
+    },
+    "showFeaturedImage": {
+      "type": "boolean",
+      "default": true
+    },
+    "showExcerpt": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDate": {
+      "type": "boolean",
+      "default": true
+    },
+    "showAuthor": {
+      "type": "boolean",
+      "default": true
+    },
+    "excerptLength": {
+      "type": "number",
+      "default": 20
+    },
+    "cardBorderRadius": {
+      "type": "string",
+      "default": "8px"
+    },
+    "cardPadding": {
+      "type": "object",
+      "default": {
+        "top": "20px",
+        "right": "20px",
+        "bottom": "20px",
+        "left": "20px"
+      }
+    },
+    "cardBackgroundColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "cardShadow": {
+      "type": "boolean",
+      "default": true
+    },
+    "titleColor": {
+      "type": "string",
+      "default": "#333333"
+    },
+    "excerptColor": {
+      "type": "string",
+      "default": "#666666"
+    },
+    "metaColor": {
+      "type": "string",
+      "default": "#999999"
+    },
+    "imageHeight": {
+      "type": "string",
+      "default": "200px"
+    },
+    "enablePagination": {
+      "type": "boolean",
+      "default": false
+    },
+    "itemsPerPage": {
+      "type": "number",
+      "default": 4
     }
   },
   "supports": {

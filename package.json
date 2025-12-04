@@ -16,5 +16,9 @@
   },
   "devDependencies": {
     "@wordpress/scripts": "^31.1.0"
+  },
+  "dependencies": {
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1"
   }
 }

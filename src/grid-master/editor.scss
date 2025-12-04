@@ -1,9 +1,48 @@
 /**
- * The following styles get applied inside the editor only.
- *
- * Replace them with your own styles or remove the file completely.
+ * Frontend styles for Grid Master block
  */
-
 .wp-block-create-block-grid-master {
-	border: 1px dotted #f00;
+    margin: 20px 0;
+
+    .grid-master-card {
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+
+        img {
+            transition: transform 0.3s ease;
+        }
+
+        &:hover img {
+            transform: scale(1.05);
+        }
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .wp-block-create-block-grid-master {
+        > div {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .wp-block-create-block-grid-master {
+        > div {
+            grid-template-columns: 1fr !important;
+        }
+    }
 }
