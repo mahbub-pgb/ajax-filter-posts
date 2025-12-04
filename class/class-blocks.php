@@ -231,7 +231,7 @@ class Blocks {
                         <?php endif; ?>
 
                         <h3 style="<?php echo esc_attr( $title_style ); ?>">
-                            <a href="<?php the_permalink(); ?>" style="color: inherit; text-decoration: none;">
+                            <a href="<?php the_permalink(); ?>" target="_blank" style="color: inherit; text-decoration: none;">
                                 <?php the_title(); ?>
                             </a>
                         </h3>
