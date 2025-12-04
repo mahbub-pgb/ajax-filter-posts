@@ -95,7 +95,7 @@ final class GridMasterPlugin {
 
 	public function block_init(){
 		if ( ! class_exists( 'GridMaster\Blocks' ) ) {
-			require_once GRIDMASTER_PATH . '/inc/class-blocks.php';
+			require_once GRIDMASTER_PATH . '/class/class-blocks.php';
 		}
 		$blocks = GridMaster\Blocks::init();
 

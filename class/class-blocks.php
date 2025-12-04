@@ -179,7 +179,7 @@ class Blocks {
                     ?>
                     <div class="grid-master-card" style="<?php echo esc_attr( $card_style ); ?>">
                         <?php if ( $show_featured_image && has_post_thumbnail() ) : ?>
-                            <a href="<?php the_permalink(); ?>">
+                            <a href="<?php the_permalink(); ?>" target="_blank" rel="noopener noreferrer">
                                 <?php the_post_thumbnail( 'large', array( 'style' => $image_style ) ); ?>
                             </a>
                         <?php endif; ?>
