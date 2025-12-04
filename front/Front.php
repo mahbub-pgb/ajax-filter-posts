@@ -75,27 +75,39 @@ class Front {
     /**
      * Render callback for frontend
      */
-    public function render_grid_master_block( $attributes ) {
-        $post_type = ! empty( $attributes['postType'] ) ? $attributes['postType'] : 'post';
-        $number    = ! empty( $attributes['numberOfItems'] ) ? intval( $attributes['numberOfItems'] ) : 5;
+    function render_grid_master_block( $attributes ) {
+        $post_type = isset( $attributes['postType'] ) ? $attributes['postType'] : 'post';
+        $number_of_items = isset( $attributes['numberOfItems'] ) ? $attributes['numberOfItems'] : 5;
 
-        $query = new \WP_Query([
+        $args = array(
             'post_type'      => $post_type,
-            'posts_per_page' => $number,
-        ]);
+            'posts_per_page' => $number_of_items,
+            'post_status'    => 'publish',
+        );
+
+        $query = new WP_Query( $args );
 
         if ( ! $query->have_posts() ) {
-            return '<p>' . esc_html__( 'No items to display', 'grid-master' ) . '</p>';
+            return '<p>' . __( 'No items to display', 'grid-master' ) . '</p>';
         }
 
-        $html = '<ul class="grid-master-items">';
-        while ( $query->have_posts() ) {
-            $query->the_post();
-            $html .= '<li>' . esc_html( get_the_title() ) . '</li>';
-        }
+        ob_start();
+        ?>
+        <div class="wp-block-create-block-grid-master">
+            <ul>
+                <?php
+                while ( $query->have_posts() ) {
+                    $query->the_post();
+                    ?>
+                    <li><?php the_title(); ?></li>
+                    <?php
+                }
+                ?>
+            </ul>
+        </div>
+        <?php
         wp_reset_postdata();
-        $html .= '</ul>';
-
-        return $html;
+        
+        return ob_get_clean();
     }
 }
