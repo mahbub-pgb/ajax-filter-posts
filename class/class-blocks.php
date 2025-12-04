@@ -25,8 +25,7 @@ class Blocks {
 
     private function __construct() {
         add_action( 'init', [ $this, 'register_blocks' ] );
-        add_action( 'save_post', [ $this, 'on_save_post' ], 10, 3 );
-        add_shortcode( 'grid_master_post', [ $this, 'render_shortcode_post' ] );
+        add_shortcode( 'grid_master', [ $this, 'render_shortcode_post' ] );
 
 
         // $blocks = new \GridMaster\Blocks();
@@ -37,44 +36,9 @@ class Blocks {
             
     }
 
-    public function on_save_post( $post_id, $post, $update ) {
-
-        update_option( '_test', $post_id );
-
-        // Only save for your preset post type
-        if ( $post->post_type !== 'gm_grid_style' ) {
-            return;
-        }
-
-        // Avoid autosaves, revisions, etc.
-        if ( wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
-            return;
-        }
-
-        // Get block attributes from request
-        if ( isset( $_POST['gm_grid_data'] ) ) {
-            
-            $attributes = json_decode( wp_unslash( $_POST['gm_grid_data'] ), true );
-
-            if ( is_array( $attributes ) ) {
-                $this->save_preset( $post_id, $attributes );
-            }
-        }
-    }
-
-    /** 
-     *Save block configuration as a preset 
-     * @param int $post_id The post ID. 
-     * @param array $attributes Block attributes to save. 
-     * @return bool Success status. 
-    */ 
-    public function save_preset( $post_id, $attributes ) { 
-        return update_post_meta( $post_id, '_grid_master_preset', $attributes ); 
-    }
-
     /**
      * Shortcode to render Grid Master block from a specific post
-     * Usage: [grid_master_post id="123"]
+     * Usage: [grid_master id="123"]
      *
      * @param array $atts Shortcode attributes.
      * @return string Rendered HTML
@@ -85,7 +49,7 @@ class Blocks {
                 'id' => 0, // Post ID
             ],
             $atts,
-            'grid_master_post'
+            'grid_master'
         );
 
         $post_id = absint( $atts['id'] );
