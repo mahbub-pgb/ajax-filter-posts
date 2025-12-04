@@ -28,6 +28,11 @@ class Front {
     private function __construct() {
         // Register Gutenberg blocks on init
         add_action( 'init', [ $this, 'register_blocks' ] );
+        add_action( 'wp_head', [ $this, 'head' ] );
+    }
+
+    public function head(){
+        
     }
 
     /**
@@ -80,6 +85,10 @@ class Front {
      * @return string Rendered block HTML.
      */
     public function render_grid_master_block( $attributes ) {
+
+        error_log('Grid Master Render Called');
+        error_log(print_r($attributes, true));
+
         // Get attributes with defaults
         $post_type = isset( $attributes['postType'] ) ? sanitize_text_field( $attributes['postType'] ) : 'post';
         $number_of_items = isset( $attributes['numberOfItems'] ) ? absint( $attributes['numberOfItems'] ) : 6;
