@@ -88,6 +88,9 @@ export default function Edit({ attributes, setAttributes }) {
     const endIndex = enablePagination ? startIndex + itemsPerPage : numberOfItems;
     const displayItems = allItems.slice(startIndex, endIndex);
 
+    const excerptLengthNum = parseInt(excerptLength, 10) || 20;
+
+
     // Reset to page 1 when changing post type or items per page
     const handlePostTypeChange = (value) => {
         setAttributes({ postType: value });
@@ -119,11 +122,13 @@ export default function Edit({ attributes, setAttributes }) {
     const truncateExcerpt = (text, length) => {
         if (!text) return '';
         const words = text.split(' ');
-        if (words.length > length) {
-            return words.slice(0, length).join(' ') + '...';
+        const len = parseInt(length, 10); // ensure it's a number
+        if (words.length > len) {
+            return words.slice(0, len).join(' ') + '...';
         }
         return text;
     };
+
 
     const gridStyle = {
         display: 'grid',
@@ -350,7 +355,8 @@ export default function Edit({ attributes, setAttributes }) {
                             {displayItems.map((item) => {
                                 const featuredImage = getFeaturedImage(item);
                                 const authorName = getAuthorName(item);
-                                const excerpt = item.excerpt?.rendered?.replace(/<[^>]+>/g, '') || '';
+                                const rawExcerpt = item.excerpt?.rendered?.replace(/<[^>]+>/g, '') || '';
+                                const excerptLengthNum = parseInt(excerptLength, 10) || 20; // Ensure integer
 
                                 return (
                                     <div key={item.id} style={cardStyle}>
@@ -362,21 +368,15 @@ export default function Edit({ attributes, setAttributes }) {
                                             />
                                         )}
                                         <h3 style={titleStyle}>{item.title.rendered}</h3>
-                                        {showExcerpt && excerpt && (
+                                        {showExcerpt && rawExcerpt && (
                                             <p style={excerptStyle}>
-                                                {truncateExcerpt(excerpt, excerptLength)}
+                                                {truncateExcerpt(rawExcerpt, excerptLengthNum)}
                                             </p>
                                         )}
                                         {(showDate || showAuthor) && (
                                             <div style={metaStyle}>
-                                                {showDate && (
-                                                    <span>
-                                                        {new Date(item.date).toLocaleDateString()}
-                                                    </span>
-                                                )}
-                                                {showAuthor && authorName && (
-                                                    <span>• {authorName}</span>
-                                                )}
+                                                {showDate && <span>{new Date(item.date).toLocaleDateString()}</span>}
+                                                {showAuthor && authorName && <span>• {authorName}</span>}
                                             </div>
                                         )}
                                     </div>
@@ -424,6 +424,7 @@ export default function Edit({ attributes, setAttributes }) {
                     <p>{__('No items to display', 'grid-master')}</p>
                 )}
             </div>
+
         </Fragment>
     );
 }
