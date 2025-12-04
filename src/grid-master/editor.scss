@@ -29,6 +29,40 @@
         }
     }
 }
+/* sdiro.scss */
+.grid-master-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+
+    .pagination-button {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: #fff;
+        cursor: pointer;
+        font-size: 14px;
+
+        &.active {
+            background: #2271b1;
+            color: #fff;
+            border-color: #2271b1;
+        }
+
+        &.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    .pagination-info {
+        font-size: 14px;
+        color: #000;
+    }
+}
+
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

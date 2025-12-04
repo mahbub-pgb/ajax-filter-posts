@@ -88,9 +88,6 @@ export default function Edit({ attributes, setAttributes }) {
     const endIndex = enablePagination ? startIndex + itemsPerPage : numberOfItems;
     const displayItems = allItems.slice(startIndex, endIndex);
 
-    const excerptLengthNum = parseInt(excerptLength, 10) || 20;
-
-
     // Reset to page 1 when changing post type or items per page
     const handlePostTypeChange = (value) => {
         setAttributes({ postType: value });
@@ -122,13 +119,11 @@ export default function Edit({ attributes, setAttributes }) {
     const truncateExcerpt = (text, length) => {
         if (!text) return '';
         const words = text.split(' ');
-        const len = parseInt(length, 10); // ensure it's a number
-        if (words.length > len) {
-            return words.slice(0, len).join(' ') + '...';
+        if (words.length > length) {
+            return words.slice(0, length).join(' ') + '...';
         }
         return text;
     };
-
 
     const gridStyle = {
         display: 'grid',
@@ -355,8 +350,7 @@ export default function Edit({ attributes, setAttributes }) {
                             {displayItems.map((item) => {
                                 const featuredImage = getFeaturedImage(item);
                                 const authorName = getAuthorName(item);
-                                const rawExcerpt = item.excerpt?.rendered?.replace(/<[^>]+>/g, '') || '';
-                                const excerptLengthNum = parseInt(excerptLength, 10) || 20; // Ensure integer
+                                const excerpt = item.excerpt?.rendered?.replace(/<[^>]+>/g, '') || '';
 
                                 return (
                                     <div key={item.id} style={cardStyle}>
@@ -368,15 +362,21 @@ export default function Edit({ attributes, setAttributes }) {
                                             />
                                         )}
                                         <h3 style={titleStyle}>{item.title.rendered}</h3>
-                                        {showExcerpt && rawExcerpt && (
+                                        {showExcerpt && excerpt && (
                                             <p style={excerptStyle}>
-                                                {truncateExcerpt(rawExcerpt, excerptLengthNum)}
+                                                {truncateExcerpt(excerpt, excerptLength)}
                                             </p>
                                         )}
                                         {(showDate || showAuthor) && (
                                             <div style={metaStyle}>
-                                                {showDate && <span>{new Date(item.date).toLocaleDateString()}</span>}
-                                                {showAuthor && authorName && <span>• {authorName}</span>}
+                                                {showDate && (
+                                                    <span>
+                                                        {new Date(item.date).toLocaleDateString()}
+                                                    </span>
+                                                )}
+                                                {showAuthor && authorName && (
+                                                    <span>• {authorName}</span>
+                                                )}
                                             </div>
                                         )}
                                     </div>
@@ -385,33 +385,33 @@ export default function Edit({ attributes, setAttributes }) {
                         </div>
 
                         {enablePagination && totalPages > 1 && (
-                            <div style={paginationStyle}>
+                            <div className="grid-master-pagination">
                                 <button
-                                    style={currentPage === 1 ? disabledButtonStyle : pageButtonStyle}
+                                    className={`pagination-button ${currentPage === 1 ? 'disabled' : ''}`}
                                     onClick={() => setCurrentPage(1)}
                                     disabled={currentPage === 1}
                                 >
                                     {__('First', 'grid-master')}
                                 </button>
                                 <button
-                                    style={currentPage === 1 ? disabledButtonStyle : pageButtonStyle}
+                                    className={`pagination-button ${currentPage === 1 ? 'disabled' : ''}`}
                                     onClick={() => setCurrentPage(currentPage - 1)}
                                     disabled={currentPage === 1}
                                 >
                                     {__('Previous', 'grid-master')}
                                 </button>
-                                <span style={{ fontSize: '14px', color: '#666' }}>
+                                <span className="pagination-info">
                                     {__('Page', 'grid-master')} {currentPage} {__('of', 'grid-master')} {totalPages}
                                 </span>
                                 <button
-                                    style={currentPage === totalPages ? disabledButtonStyle : pageButtonStyle}
+                                    className={`pagination-button ${currentPage === totalPages ? 'disabled' : ''}`}
                                     onClick={() => setCurrentPage(currentPage + 1)}
                                     disabled={currentPage === totalPages}
                                 >
                                     {__('Next', 'grid-master')}
                                 </button>
                                 <button
-                                    style={currentPage === totalPages ? disabledButtonStyle : pageButtonStyle}
+                                    className={`pagination-button ${currentPage === totalPages ? 'disabled' : ''}`}
                                     onClick={() => setCurrentPage(totalPages)}
                                     disabled={currentPage === totalPages}
                                 >
@@ -424,7 +424,6 @@ export default function Edit({ attributes, setAttributes }) {
                     <p>{__('No items to display', 'grid-master')}</p>
                 )}
             </div>
-
         </Fragment>
     );
 }
