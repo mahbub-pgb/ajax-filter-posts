@@ -59,7 +59,7 @@ function Edit({
     showAuthor = true,
     excerptLength = 20,
     cardBorderRadius = '8px',
-    cardPadding = {
+    _cardPadding = {
       top: '20px',
       right: '20px',
       bottom: '20px',
@@ -180,7 +180,7 @@ function Edit({
   const cardStyle = {
     backgroundColor: cardBackgroundColor,
     borderRadius: cardBorderRadius,
-    padding: `${cardPadding.top} ${cardPadding.right} ${cardPadding.bottom} ${cardPadding.left}`,
+    padding: `${_cardPadding.top} ${_cardPadding.right} ${_cardPadding.bottom} ${_cardPadding.left}`,
     boxShadow: cardShadow ? '0 2px 8px rgba(0,0,0,0.1)' : 'none',
     overflow: 'hidden',
     transition: 'transform 0.3s ease, box-shadow 0.3s ease'
@@ -353,14 +353,15 @@ function Edit({
           })
         }), _wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalBoxControl && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalBoxControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)('Card Padding', 'grid-master'),
-          values: {
+          resetValues: {
             top: '20px',
-            left: '20px',
             right: '20px',
-            bottom: '20px'
+            bottom: '20px',
+            left: '20px'
           },
+          values: _cardPadding,
           onChange: value => setAttributes({
-            cardPadding: value
+            _cardPadding: value
           })
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {

@@ -28,7 +28,7 @@ export default function Edit({ attributes, setAttributes }) {
         showAuthor = true,
         excerptLength = 20,
         cardBorderRadius = '8px',
-        cardPadding = { top: '20px', right: '20px', bottom: '20px', left: '20px' },
+        _cardPadding = { top: '20px', right: '20px', bottom: '20px', left: '20px' },
         cardBackgroundColor = '#ffffff',
         cardShadow = true,
         titleColor = '#333333',
@@ -135,7 +135,7 @@ export default function Edit({ attributes, setAttributes }) {
     const cardStyle = {
         backgroundColor: cardBackgroundColor,
         borderRadius: cardBorderRadius,
-        padding: `${cardPadding.top} ${cardPadding.right} ${cardPadding.bottom} ${cardPadding.left}`,
+        padding: `${_cardPadding.top} ${_cardPadding.right} ${_cardPadding.bottom} ${_cardPadding.left}`,
         boxShadow: cardShadow ? '0 2px 8px rgba(0,0,0,0.1)' : 'none',
         overflow: 'hidden',
         transition: 'transform 0.3s ease, box-shadow 0.3s ease',
@@ -312,14 +312,15 @@ export default function Edit({ attributes, setAttributes }) {
                     />
                     {BoxControl && (
                         <BoxControl
-                            label={__('Card Padding', 'grid-master')}                            
-                            values={ {
-                                    top: '20px',
-                                    left: '20px',
-                                    right: '20px',
-                                    bottom: '20px',
-                                    } }
-                            onChange={(value) => setAttributes({ cardPadding: value })}
+                            label={__('Card Padding', 'grid-master')}
+                            resetValues={{
+                                top: '20px',
+                                right: '20px',
+                                bottom: '20px',
+                                left: '20px',
+                            }}
+                            values={_cardPadding}
+                            onChange={(value) => setAttributes({ _cardPadding: value })}
                         />
                     )}
                 </PanelBody>

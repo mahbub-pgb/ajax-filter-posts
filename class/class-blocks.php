@@ -137,7 +137,7 @@ class Blocks {
         $items_per_page = isset( $attributes['itemsPerPage'] ) ? absint( $attributes['itemsPerPage'] ) : 4;
         
         // Handle padding
-        $card_padding = isset( $attributes['cardPadding'] ) ? $attributes['cardPadding'] : array(
+        $card_padding = isset( $attributes['_cardPadding'] ) ? $attributes['_cardPadding'] : array(
             'top' => '20px',
             'right' => '20px',
             'bottom' => '20px',
