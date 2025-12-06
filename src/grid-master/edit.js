@@ -312,8 +312,13 @@ export default function Edit({ attributes, setAttributes }) {
                     />
                     {BoxControl && (
                         <BoxControl
-                            label={__('Card Padding', 'grid-master')}
-                            values={cardPadding}
+                            label={__('Card Padding', 'grid-master')}                            
+                            values={ {
+                                    top: '20px',
+                                    left: '20px',
+                                    right: '20px',
+                                    bottom: '20px',
+                                    } }
                             onChange={(value) => setAttributes({ cardPadding: value })}
                         />
                     )}
