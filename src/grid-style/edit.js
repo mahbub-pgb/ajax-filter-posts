@@ -1,38 +1,30 @@
-/**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
- */
 import { __ } from '@wordpress/i18n';
-
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-import { useBlockProps } from '@wordpress/block-editor';
-
-/**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * Those files can contain any CSS code that gets applied to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
- */
+import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
+import { PanelBody, TextControl } from '@wordpress/components';
 import './editor.scss';
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @return {Element} Element to render.
- */
-export default function Edit() {
+export default function Edit({ attributes, setAttributes }) {
+	const { sectionTitle } = attributes;
+
 	return (
-		<p { ...useBlockProps() }>
-			{ __( 'Grid Style – hello from the editor!', 'grid-style' ) }
-		</p>
+		<>
+			<InspectorControls>
+				<PanelBody title={__('Section Settings', 'grid-style')} initialOpen={true}>
+					<TextControl
+						label={__('Section Title', 'grid-style')}
+						value={sectionTitle}
+						onChange={(value) => setAttributes({ sectionTitle: value })}
+						help={__('Enter the title for this section', 'grid-style')}
+					/>
+				</PanelBody>
+			</InspectorControls>
+
+			<div {...useBlockProps()}>
+				<section className="grid-style-section">
+					<h2 className="section-title">{sectionTitle}</h2>
+					{/* Add your grid content here */}
+				</section>
+			</div>
+		</>
 	);
 }
