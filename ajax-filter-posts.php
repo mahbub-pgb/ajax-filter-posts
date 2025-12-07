@@ -38,11 +38,17 @@ final class GridMasterPlugin {
 		// Action link.
 		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'action_links' ) );
 
+
 		// Admin Functions.
 		if ( is_admin() ) {
 			$this->admin_init();
 		}
+		
+		$this->block_init();
+		
 	}
+
+	
 
 	/**
 	 * Initializes a singleton instance
@@ -85,6 +91,15 @@ final class GridMasterPlugin {
 			require_once GRIDMASTER_PATH . '/admin/Ajax.php';
 		}
 		$ajax = new GridMaster\Ajax();
+	}
+
+	public function block_init(){
+		if ( ! class_exists( 'GridMaster\Blocks' ) ) {
+			require_once GRIDMASTER_PATH . '/class/class-blocks.php';
+		}
+		$blocks = GridMaster\Blocks::init();
+
+		
 	}
 
 	/**
