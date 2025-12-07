@@ -1,0 +1,56 @@
+/*!*******************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/grid-container/editor.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************/
+/**
+ * Editor Styles for Grid Container Block
+ */
+.wp-block-create-block-grid-container .grid-container {
+  display: grid;
+  min-height: 100px;
+  border: 2px dashed #ccc;
+  position: relative;
+}
+.wp-block-create-block-grid-container .grid-container:before {
+  content: "Grid Container";
+  position: absolute;
+  top: -24px;
+  left: 0;
+  font-size: 11px;
+  color: #757575;
+  background: #f0f0f0;
+  padding: 2px 8px;
+  border-radius: 2px;
+  font-weight: 500;
+  z-index: 1;
+}
+.wp-block-create-block-grid-container .grid-container > * {
+  min-width: 0;
+  min-height: 50px;
+}
+.wp-block-create-block-grid-container .grid-container .block-editor-inner-blocks {
+  display: contents;
+}
+.wp-block-create-block-grid-container .grid-container .block-editor-block-list__layout {
+  display: contents;
+}
+.grid-responsive-tabs {
+  margin-bottom: 16px;
+}
+.grid-responsive-tabs .components-tab-panel__tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #ddd;
+}
+.grid-responsive-tabs .components-button {
+  flex: 1;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+}
+.grid-responsive-tabs .components-button.is-active {
+  border-bottom-color: #2271b1;
+  color: #2271b1;
+}
+
+/*# sourceMappingURL=index.css.map*/

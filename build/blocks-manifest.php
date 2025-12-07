@@ -1,6 +1,136 @@
 <?php
 // This file is generated. Do not modify it manually.
 return array(
+	'grid-container' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/grid-container',
+		'version' => '0.1.0',
+		'title' => 'Grid Container',
+		'category' => 'grid',
+		'icon' => 'grid-view',
+		'description' => 'Create responsive grid layouts with multiple column options.',
+		'supports' => array(
+			'html' => false,
+			'align' => array(
+				'wide',
+				'full'
+			),
+			'color' => array(
+				'background' => true,
+				'text' => true
+			),
+			'spacing' => array(
+				'padding' => true,
+				'margin' => true
+			)
+		),
+		'attributes' => array(
+			'layoutDirection' => array(
+				'type' => 'string',
+				'default' => 'horizontal'
+			),
+			'layoutDirectionTablet' => array(
+				'type' => 'string',
+				'default' => 'horizontal'
+			),
+			'layoutDirectionMobile' => array(
+				'type' => 'string',
+				'default' => 'vertical'
+			),
+			'columns' => array(
+				'type' => 'number',
+				'default' => 3
+			),
+			'columnsTablet' => array(
+				'type' => 'number',
+				'default' => 2
+			),
+			'columnsMobile' => array(
+				'type' => 'number',
+				'default' => 1
+			),
+			'columnGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'rowGap' => array(
+				'type' => 'number',
+				'default' => 20
+			),
+			'alignItems' => array(
+				'type' => 'string',
+				'default' => 'stretch'
+			),
+			'justifyItems' => array(
+				'type' => 'string',
+				'default' => 'stretch'
+			),
+			'backgroundColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'paddingTop' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'paddingRight' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'paddingBottom' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'paddingLeft' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginTop' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginRight' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginBottom' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginLeft' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'borderColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'borderWidth' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'borderStyle' => array(
+				'type' => 'string',
+				'default' => 'solid'
+			),
+			'borderRadius' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'boxShadow' => array(
+				'type' => 'string',
+				'default' => ''
+			)
+		),
+		'providesContext' => array(
+			'gridContainer/columns' => 'columns'
+		),
+		'textdomain' => 'grid-master',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css'
+	),
 	'grid-style' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,

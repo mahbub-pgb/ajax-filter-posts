@@ -1,0 +1,130 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/grid-container",
+  "version": "0.1.0",
+  "title": "Grid Container",
+  "category": "grid",
+  "icon": "grid-view",
+  "description": "Create responsive grid layouts with multiple column options.",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ],
+    "color": {
+      "background": true,
+      "text": true
+    },
+    "spacing": {
+      "padding": true,
+      "margin": true
+    }
+  },
+  "attributes": {
+    "layoutDirection": {
+      "type": "string",
+      "default": "horizontal"
+    },
+    "layoutDirectionTablet": {
+      "type": "string",
+      "default": "horizontal"
+    },
+    "layoutDirectionMobile": {
+      "type": "string",
+      "default": "vertical"
+    },
+    "columns": {
+      "type": "number",
+      "default": 3
+    },
+    "columnsTablet": {
+      "type": "number",
+      "default": 2
+    },
+    "columnsMobile": {
+      "type": "number",
+      "default": 1
+    },
+    "columnGap": {
+      "type": "number",
+      "default": 20
+    },
+    "rowGap": {
+      "type": "number",
+      "default": 20
+    },
+    "alignItems": {
+      "type": "string",
+      "default": "stretch"
+    },
+    "justifyItems": {
+      "type": "string",
+      "default": "stretch"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": ""
+    },
+    "paddingTop": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingRight": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingBottom": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingLeft": {
+      "type": "number",
+      "default": 0
+    },
+    "marginTop": {
+      "type": "number",
+      "default": 0
+    },
+    "marginRight": {
+      "type": "number",
+      "default": 0
+    },
+    "marginBottom": {
+      "type": "number",
+      "default": 0
+    },
+    "marginLeft": {
+      "type": "number",
+      "default": 0
+    },
+    "borderColor": {
+      "type": "string",
+      "default": ""
+    },
+    "borderWidth": {
+      "type": "number",
+      "default": 0
+    },
+    "borderStyle": {
+      "type": "string",
+      "default": "solid"
+    },
+    "borderRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "boxShadow": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "providesContext": {
+    "gridContainer/columns": "columns"
+  },
+  "textdomain": "grid-master",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}
