@@ -9,12 +9,108 @@
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
 	"supports": {
-		"html": false
+		"html": false,
+		"color": {
+			"background": true,
+			"text": true,
+			"gradients": true,
+			"link": true
+		},
+		"spacing": {
+			"padding": true,
+			"margin": true,
+			"blockGap": true
+		},
+		"typography": {
+			"fontSize": true,
+			"lineHeight": true,
+			"fontWeight": true,
+			"fontStyle": true,
+			"textTransform": true,
+			"letterSpacing": true
+		},
+		"border": {
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true
+		},
+		"shadow": true,
+		"align": true,
+		"alignWide": true
 	},
 	"attributes": {
 		"sectionTitle": {
 			"type": "string",
 			"default": "Section Title"
+		},
+		"titleColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"titleFontSize": {
+			"type": "number",
+			"default": 24
+		},
+		"titleFontWeight": {
+			"type": "string",
+			"default": "bold"
+		},
+		"backgroundColor": {
+			"type": "string",
+			"default": ""
+		},
+		"textColor": {
+			"type": "string",
+			"default": ""
+		},
+		"borderColor": {
+			"type": "string",
+			"default": ""
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 1
+		},
+		"borderStyle": {
+			"type": "string",
+			"default": "solid"
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 0
+		},
+		"paddingTop": {
+			"type": "number",
+			"default": 2
+		},
+		"paddingRight": {
+			"type": "number",
+			"default": 2
+		},
+		"paddingBottom": {
+			"type": "number",
+			"default": 2
+		},
+		"paddingLeft": {
+			"type": "number",
+			"default": 2
+		},
+		"marginTop": {
+			"type": "number",
+			"default": 0
+		},
+		"marginBottom": {
+			"type": "number",
+			"default": 0
+		},
+		"boxShadow": {
+			"type": "string",
+			"default": ""
+		},
+		"alignment": {
+			"type": "string",
+			"default": "left"
 		}
 	},
 	"textdomain": "grid-style",
