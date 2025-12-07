@@ -12,6 +12,7 @@ import {
 	RangeControl,
 	SelectControl,
 	ToggleControl,
+	Button,
 	__experimentalBoxControl as BoxControl
 } from '@wordpress/components';
 import './editor.scss';
@@ -33,10 +34,84 @@ export default function Edit({ attributes, setAttributes }) {
 		paddingBottom,
 		paddingLeft,
 		marginTop,
+		marginRight,
 		marginBottom,
+		marginLeft,
 		boxShadow,
 		alignment
 	} = attributes;
+
+	// Reset functions
+	const resetTitleStyles = () => {
+		setAttributes({
+			titleColor: '#000000',
+			titleFontSize: 24,
+			titleFontWeight: 'bold'
+		});
+	};
+
+	const resetColors = () => {
+		setAttributes({
+			backgroundColor: '',
+			textColor: ''
+		});
+	};
+
+	const resetBorder = () => {
+		setAttributes({
+			borderColor: '',
+			borderWidth: 1,
+			borderStyle: 'solid',
+			borderRadius: 0
+		});
+	};
+
+	const resetPadding = () => {
+		setAttributes({
+			paddingTop: 20,
+			paddingRight: 20,
+			paddingBottom: 20,
+			paddingLeft: 20
+		});
+	};
+
+	const resetMargin = () => {
+		setAttributes({
+			marginTop: 0,
+			marginRight: 0,
+			marginBottom: 0,
+			marginLeft: 0
+		});
+	};
+
+	const resetBoxShadow = () => {
+		setAttributes({ boxShadow: '' });
+	};
+
+	const resetAll = () => {
+		setAttributes({
+			sectionTitle: 'Section Title',
+			titleColor: '#000000',
+			titleFontSize: 24,
+			titleFontWeight: 'bold',
+			backgroundColor: '',
+			textColor: '',
+			borderColor: '',
+			borderWidth: 1,
+			borderStyle: 'solid',
+			borderRadius: 0,
+			paddingTop: 20,
+			paddingRight: 20,
+			paddingBottom: 20,
+			paddingLeft: 20,
+			marginTop: 0,
+			marginRight: 0,
+			marginBottom: 0,
+			marginLeft: 0,
+			boxShadow: '',
+			alignment: 'left'
+		});
+	};
 
 	// Build inline styles
 	const sectionStyles = {
@@ -51,7 +126,9 @@ export default function Edit({ attributes, setAttributes }) {
 		paddingBottom: paddingBottom ? `${paddingBottom}px` : undefined,
 		paddingLeft: paddingLeft ? `${paddingLeft}px` : undefined,
 		marginTop: marginTop ? `${marginTop}px` : undefined,
+		marginRight: marginRight ? `${marginRight}px` : undefined,
 		marginBottom: marginBottom ? `${marginBottom}px` : undefined,
+		marginLeft: marginLeft ? `${marginLeft}px` : undefined,
 		boxShadow: boxShadow || undefined,
 		textAlign: alignment || undefined
 	};
@@ -72,6 +149,18 @@ export default function Edit({ attributes, setAttributes }) {
 			</BlockControls>
 
 			<InspectorControls>
+				{/* Reset All Button */}
+				<PanelBody>
+					<Button
+						isDestructive
+						variant="secondary"
+						onClick={resetAll}
+						style={{ width: '100%' }}
+					>
+						{__('Reset All Settings', 'grid-style')}
+					</Button>
+				</PanelBody>
+
 				{/* Content Settings */}
 				<PanelBody title={__('Content Settings', 'grid-style')} initialOpen={true}>
 					<TextControl
@@ -84,6 +173,17 @@ export default function Edit({ attributes, setAttributes }) {
 
 				{/* Title Styling */}
 				<PanelBody title={__('Title Styling', 'grid-style')} initialOpen={false}>
+					<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+						<strong>{__('Title Styling', 'grid-style')}</strong>
+						<Button
+							isSmall
+							variant="secondary"
+							onClick={resetTitleStyles}
+						>
+							{__('Reset', 'grid-style')}
+						</Button>
+					</div>
+
 					<p><strong>{__('Title Color', 'grid-style')}</strong></p>
 					<ColorPalette
 						value={titleColor}
@@ -121,6 +221,17 @@ export default function Edit({ attributes, setAttributes }) {
 
 				{/* Colors */}
 				<PanelBody title={__('Colors', 'grid-style')} initialOpen={false}>
+					<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+						<strong>{__('Colors', 'grid-style')}</strong>
+						<Button
+							isSmall
+							variant="secondary"
+							onClick={resetColors}
+						>
+							{__('Reset', 'grid-style')}
+						</Button>
+					</div>
+
 					<p><strong>{__('Background Color', 'grid-style')}</strong></p>
 					<ColorPalette
 						value={backgroundColor}
@@ -136,6 +247,17 @@ export default function Edit({ attributes, setAttributes }) {
 
 				{/* Border Settings */}
 				<PanelBody title={__('Border', 'grid-style')} initialOpen={false}>
+					<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+						<strong>{__('Border Settings', 'grid-style')}</strong>
+						<Button
+							isSmall
+							variant="secondary"
+							onClick={resetBorder}
+						>
+							{__('Reset', 'grid-style')}
+						</Button>
+					</div>
+
 					<p><strong>{__('Border Color', 'grid-style')}</strong></p>
 					<ColorPalette
 						value={borderColor}
@@ -180,6 +302,17 @@ export default function Edit({ attributes, setAttributes }) {
 
 				{/* Spacing - Padding */}
 				<PanelBody title={__('Padding', 'grid-style')} initialOpen={false}>
+					<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+						<strong>{__('Padding', 'grid-style')}</strong>
+						<Button
+							isSmall
+							variant="secondary"
+							onClick={resetPadding}
+						>
+							{__('Reset', 'grid-style')}
+						</Button>
+					</div>
+
 					<RangeControl
 						label={__('Padding Top', 'grid-style')}
 						value={paddingTop}
@@ -219,10 +352,30 @@ export default function Edit({ attributes, setAttributes }) {
 
 				{/* Spacing - Margin */}
 				<PanelBody title={__('Margin', 'grid-style')} initialOpen={false}>
+					<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+						<strong>{__('Margin', 'grid-style')}</strong>
+						<Button
+							isSmall
+							variant="secondary"
+							onClick={resetMargin}
+						>
+							{__('Reset', 'grid-style')}
+						</Button>
+					</div>
+
 					<RangeControl
 						label={__('Margin Top', 'grid-style')}
 						value={marginTop}
 						onChange={(value) => setAttributes({ marginTop: value })}
+						min={0}
+						max={200}
+						step={1}
+					/>
+
+					<RangeControl
+						label={__('Margin Right', 'grid-style')}
+						value={marginRight}
+						onChange={(value) => setAttributes({ marginRight: value })}
 						min={0}
 						max={200}
 						step={1}
@@ -236,10 +389,30 @@ export default function Edit({ attributes, setAttributes }) {
 						max={200}
 						step={1}
 					/>
+
+					<RangeControl
+						label={__('Margin Left', 'grid-style')}
+						value={marginLeft}
+						onChange={(value) => setAttributes({ marginLeft: value })}
+						min={0}
+						max={200}
+						step={1}
+					/>
 				</PanelBody>
 
 				{/* Box Shadow */}
 				<PanelBody title={__('Box Shadow', 'grid-style')} initialOpen={false}>
+					<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+						<strong>{__('Box Shadow', 'grid-style')}</strong>
+						<Button
+							isSmall
+							variant="secondary"
+							onClick={resetBoxShadow}
+						>
+							{__('Reset', 'grid-style')}
+						</Button>
+					</div>
+
 					<SelectControl
 						label={__('Shadow Preset', 'grid-style')}
 						value={boxShadow}

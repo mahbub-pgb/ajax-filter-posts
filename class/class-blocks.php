@@ -88,70 +88,77 @@ class Blocks {
      * Render callback for the Grid Master block.
      */
     public function render_grid_master_block( $attributes ) {
-        $section_title = isset($attributes['sectionTitle']) ? esc_html($attributes['sectionTitle']) : 'Section Title';
+       $section_title = isset($attributes['sectionTitle']) ? esc_html($attributes['sectionTitle']) : 'Section Title';
 
-            // Build inline styles for section
-            $section_styles = array();
-            if (!empty($attributes['backgroundColor'])) {
-                $section_styles[] = 'background-color: ' . esc_attr($attributes['backgroundColor']);
-            }
-            if (!empty($attributes['textColor'])) {
-                $section_styles[] = 'color: ' . esc_attr($attributes['textColor']);
-            }
-            if (!empty($attributes['borderColor'])) {
-                $section_styles[] = 'border-color: ' . esc_attr($attributes['borderColor']);
-            }
-            if (isset($attributes['borderWidth'])) {
-                $section_styles[] = 'border-width: ' . esc_attr($attributes['borderWidth']) . 'px';
-            }
-            if (!empty($attributes['borderStyle'])) {
-                $section_styles[] = 'border-style: ' . esc_attr($attributes['borderStyle']);
-            }
-            if (isset($attributes['borderRadius'])) {
-                $section_styles[] = 'border-radius: ' . esc_attr($attributes['borderRadius']) . 'px';
-            }
-            if (isset($attributes['paddingTop'])) {
-                $section_styles[] = 'padding-top: ' . esc_attr($attributes['paddingTop']) . 'px';
-            }
-            if (isset($attributes['paddingRight'])) {
-                $section_styles[] = 'padding-right: ' . esc_attr($attributes['paddingRight']) . 'px';
-            }
-            if (isset($attributes['paddingBottom'])) {
-                $section_styles[] = 'padding-bottom: ' . esc_attr($attributes['paddingBottom']) . 'px';
-            }
-            if (isset($attributes['paddingLeft'])) {
-                $section_styles[] = 'padding-left: ' . esc_attr($attributes['paddingLeft']) . 'px';
-            }
-            if (isset($attributes['marginTop'])) {
-                $section_styles[] = 'margin-top: ' . esc_attr($attributes['marginTop']) . 'px';
-            }
-            if (isset($attributes['marginBottom'])) {
-                $section_styles[] = 'margin-bottom: ' . esc_attr($attributes['marginBottom']) . 'px';
-            }
-            if (!empty($attributes['boxShadow'])) {
-                $section_styles[] = 'box-shadow: ' . esc_attr($attributes['boxShadow']);
-            }
-            if (!empty($attributes['alignment'])) {
-                $section_styles[] = 'text-align: ' . esc_attr($attributes['alignment']);
-            }
+        // Build inline styles for section
+        $section_styles = array();
+        if (!empty($attributes['backgroundColor'])) {
+            $section_styles[] = 'background-color: ' . esc_attr($attributes['backgroundColor']);
+        }
+        if (!empty($attributes['textColor'])) {
+            $section_styles[] = 'color: ' . esc_attr($attributes['textColor']);
+        }
+        if (!empty($attributes['borderColor'])) {
+            $section_styles[] = 'border-color: ' . esc_attr($attributes['borderColor']);
+        }
+        if (isset($attributes['borderWidth'])) {
+            $section_styles[] = 'border-width: ' . esc_attr($attributes['borderWidth']) . 'px';
+        }
+        if (!empty($attributes['borderStyle'])) {
+            $section_styles[] = 'border-style: ' . esc_attr($attributes['borderStyle']);
+        }
+        if (isset($attributes['borderRadius'])) {
+            $section_styles[] = 'border-radius: ' . esc_attr($attributes['borderRadius']) . 'px';
+        }
+        if (isset($attributes['paddingTop'])) {
+            $section_styles[] = 'padding-top: ' . esc_attr($attributes['paddingTop']) . 'px';
+        }
+        if (isset($attributes['paddingRight'])) {
+            $section_styles[] = 'padding-right: ' . esc_attr($attributes['paddingRight']) . 'px';
+        }
+        if (isset($attributes['paddingBottom'])) {
+            $section_styles[] = 'padding-bottom: ' . esc_attr($attributes['paddingBottom']) . 'px';
+        }
+        if (isset($attributes['paddingLeft'])) {
+            $section_styles[] = 'padding-left: ' . esc_attr($attributes['paddingLeft']) . 'px';
+        }
+        if (isset($attributes['marginTop'])) {
+            $section_styles[] = 'margin-top: ' . esc_attr($attributes['marginTop']) . 'px';
+        }
+        if (isset($attributes['marginRight'])) {
+            $section_styles[] = 'margin-right: ' . esc_attr($attributes['marginRight']) . 'px';
+        }
+        if (isset($attributes['marginBottom'])) {
+            $section_styles[] = 'margin-bottom: ' . esc_attr($attributes['marginBottom']) . 'px';
+        }
+        if (isset($attributes['marginLeft'])) {
+            $section_styles[] = 'margin-left: ' . esc_attr($attributes['marginLeft']) . 'px';
+        }
+        if (!empty($attributes['boxShadow'])) {
+            $section_styles[] = 'box-shadow: ' . esc_attr($attributes['boxShadow']);
+        }
+        if (!empty($attributes['alignment'])) {
+            $section_styles[] = 'text-align: ' . esc_attr($attributes['alignment']);
+        }
 
-            // Build inline styles for title
-            $title_styles = array();
-            if (!empty($attributes['titleColor'])) {
-                $title_styles[] = 'color: ' . esc_attr($attributes['titleColor']);
-            }
-            if (isset($attributes['titleFontSize'])) {
-                $title_styles[] = 'font-size: ' . esc_attr($attributes['titleFontSize']) . 'px';
-            }
-            if (!empty($attributes['titleFontWeight'])) {
-                $title_styles[] = 'font-weight: ' . esc_attr($attributes['titleFontWeight']);
-            }
+        // Build inline styles for title
+        $title_styles = array();
+        if (!empty($attributes['titleColor'])) {
+            $title_styles[] = 'color: ' . esc_attr($attributes['titleColor']);
+        }
+        if (isset($attributes['titleFontSize'])) {
+            $title_styles[] = 'font-size: ' . esc_attr($attributes['titleFontSize']) . 'px';
+        }
+        if (!empty($attributes['titleFontWeight'])) {
+            $title_styles[] = 'font-weight: ' . esc_attr($attributes['titleFontWeight']);
+        }
 
-            $section_style_attr = !empty($section_styles) ? ' style="' . implode('; ', $section_styles) . '"' : '';
-            $title_style_attr = !empty($title_styles) ? ' style="' . implode('; ', $title_styles) . '"' : '';
+        $section_style_attr = !empty($section_styles) ? ' style="' . implode('; ', $section_styles) . '"' : '';
+        $title_style_attr = !empty($title_styles) ? ' style="' . implode('; ', $title_styles) . '"' : '';
         
         ob_start();
         ?>
+        
         <div <?php echo get_block_wrapper_attributes(); ?>>
             <section class="grid-style-section"<?php echo $section_style_attr; ?>>
                 <h2 class="section-title"<?php echo $title_style_attr; ?>><?php echo $section_title; ?></h2>

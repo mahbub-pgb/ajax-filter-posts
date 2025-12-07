@@ -105,7 +105,15 @@ return array(
 				'type' => 'number',
 				'default' => 0
 			),
+			'marginRight' => array(
+				'type' => 'number',
+				'default' => 0
+			),
 			'marginBottom' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginLeft' => array(
 				'type' => 'number',
 				'default' => 0
 			),
