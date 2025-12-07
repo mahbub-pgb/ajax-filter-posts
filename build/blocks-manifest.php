@@ -7,8 +7,8 @@ return array(
 		'name' => 'create-block/grid-style',
 		'version' => '0.1.0',
 		'title' => 'Grid Style',
-		'category' => 'widgets',
-		'icon' => 'smiley',
+		'category' => 'grid',
+		'icon' => 'grid-view',
 		'description' => 'Example block scaffolded with Create Block tool.',
 		'example' => array(
 			
