@@ -55,14 +55,16 @@ class Shortcode {
 		// Grid Style
 		$grid_style = $args['grid_style'];
 
-		// Get Style from post type "gm_grid_style" Gutenberg post content if $grid_style is integer
 		if ( is_numeric( $grid_style ) ) {
-			$style_post = get_post( intval( $grid_style ) );
-			if ( $style_post && $style_post->post_type === 'gm_grid_style' ) {
-				var_dump( $style_post );
-				var_dump( get_the_content( null, false, $style_post ) );
-			}
+		    $style_post = get_post( intval( $grid_style ) );
+
+		    if ( $style_post && $style_post->post_type === 'gm_grid_style' ) {
+		        $shortcode = '[grid_master id="' . $style_post->ID . '"]';
+		        
+		        echo do_shortcode( $shortcode );
+		    }
 		}
+
 
 		// Enqueue Styles
 		if ( defined( 'GRIDMASTER_PRO_PATH' ) && file_exists( GRIDMASTER_PRO_PATH . '/assets/css/' . $grid_style . '.css' ) ) {
