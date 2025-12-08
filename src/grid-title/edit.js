@@ -66,10 +66,10 @@ export default function Edit({ attributes, setAttributes }) {
 
 	const resetPadding = () =>
 		setAttributes({
-			paddingTop: 20,
-			paddingRight: 20,
-			paddingBottom: 20,
-			paddingLeft: 20
+			paddingTop: 2,
+			paddingRight: 2,
+			paddingBottom: 2,
+			paddingLeft: 2
 		});
 
 	const resetMargin = () =>
