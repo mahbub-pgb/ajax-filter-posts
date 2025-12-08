@@ -136,7 +136,7 @@ return array(
 		'apiVersion' => 3,
 		'name' => 'create-block/grid-title',
 		'version' => '0.1.0',
-		'title' => 'Grid Style',
+		'title' => 'Grid Title',
 		'category' => 'grid',
 		'postTypes' => array(
 			'gm_grid_style'
@@ -259,7 +259,7 @@ return array(
 				'default' => 'left'
 			)
 		),
-		'textdomain' => 'grid-style',
+		'textdomain' => 'grid-title',
 		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css'

@@ -67,6 +67,7 @@ class Blocks {
         $output = '';
 
         foreach ( $blocks as $block ) {
+            // var_dump( $block['blockName'] );
             if ( $block['blockName'] === 'create-block/grid-title' ) {
                 // Get inner blocks and render them properly
                 $inner_blocks_html = '';
