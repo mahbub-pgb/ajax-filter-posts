@@ -59,7 +59,7 @@ class Shortcode {
 		if ( is_numeric( $grid_style ) ) {
 			$style_post = get_post( intval( $grid_style ) );
 			if ( $style_post && $style_post->post_type === 'gm_grid_style' ) {
-				var_dump( 'Find: get the content' );
+				var_dump( $style_post );
 				var_dump( get_the_content( null, false, $style_post ) );
 			}
 		}

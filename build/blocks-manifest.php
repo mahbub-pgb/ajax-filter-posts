@@ -138,6 +138,9 @@ return array(
 		'version' => '0.1.0',
 		'title' => 'Grid Style',
 		'category' => 'grid',
+		'postTypes' => array(
+			'gm_grid_style'
+		),
 		'icon' => 'grid-view',
 		'description' => 'Example block scaffolded with Create Block tool.',
 		'example' => array(
