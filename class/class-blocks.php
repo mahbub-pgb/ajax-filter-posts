@@ -78,7 +78,17 @@ class Blocks {
                 }
                 
                 // Render the main block with inner content
-                $output .= $this->render_grid_master_block( $block['attrs'], $inner_blocks_html, $post_id );
+                $output .= $this->render_grid_title_block( $block['attrs']);
+            }
+
+            if ( $block['blockName'] === 'create-block/grid-image' ) {
+                if ( !empty($block['innerBlocks']) ) {
+                    foreach ( $block['innerBlocks'] as $inner_block ) {
+                        $inner_blocks_html .= render_block( $inner_block );
+                    }
+                }
+
+                $output .= $this->render_grid_image_block( $block['attrs']);
             }
         }
 
@@ -88,6 +98,7 @@ class Blocks {
 
         return $output;
     }
+
     
     /**
      * Filter allowed blocks based on post type
@@ -143,8 +154,17 @@ class Blocks {
 
             $block_path = $build_path . '/' . $block_name;
 
+            // Different render callbacks for different blocks
+            $render_callback = null;
+            
+            if ( $block_name === 'create-block/grid-title' ) {
+                $render_callback = [ $this, 'render_grid_title_block' ];
+            } elseif ( $block_name === 'create-block/grid-image' ) {
+                $render_callback = [ $this, 'render_grid_image_block' ];
+            }
+
             register_block_type( $block_path, array(
-                'render_callback' => [ $this, 'render_grid_master_block' ],
+                'render_callback' => $render_callback,
             ) );
         }
     }
@@ -154,7 +174,7 @@ class Blocks {
     /**
      * Render callback for the Grid Style block.
      */
-    public function render_grid_master_block( $attributes, $content = '', $block = null ) {
+    public function render_grid_title_block( $attributes, $content = '', $block = null ) {
         
         // Get post ID
         $post_id = null;
@@ -259,6 +279,93 @@ class Blocks {
                     <?php echo $content; ?>
                 </div>
             </section>
+        </div>
+        <?php
+        return ob_get_clean();
+    }
+
+    /**
+     * Render callback for the Grid Image block.
+     */
+    public function render_grid_image_block( $attributes, $content = '', $block = null ) {
+        
+        $imageUrl = isset($attributes['imageUrl']) ? esc_url($attributes['imageUrl']) : '';
+        $imageAlt = isset($attributes['imageAlt']) ? esc_attr($attributes['imageAlt']) : '';
+        $imageWidth = isset($attributes['imageWidth']) ? intval($attributes['imageWidth']) : 100;
+        $imageHeight = isset($attributes['imageHeight']) ? $attributes['imageHeight'] : 'auto';
+        $objectFit = isset($attributes['objectFit']) ? esc_attr($attributes['objectFit']) : 'cover';
+        $borderRadius = isset($attributes['borderRadius']) ? intval($attributes['borderRadius']) : 0;
+        $borderWidth = isset($attributes['borderWidth']) ? intval($attributes['borderWidth']) : 0;
+        $borderColor = isset($attributes['borderColor']) ? esc_attr($attributes['borderColor']) : '';
+        $borderStyle = isset($attributes['borderStyle']) ? esc_attr($attributes['borderStyle']) : 'solid';
+        $boxShadow = isset($attributes['boxShadow']) ? esc_attr($attributes['boxShadow']) : '';
+        $marginTop = isset($attributes['marginTop']) ? intval($attributes['marginTop']) : 0;
+        $marginRight = isset($attributes['marginRight']) ? intval($attributes['marginRight']) : 0;
+        $marginBottom = isset($attributes['marginBottom']) ? intval($attributes['marginBottom']) : 0;
+        $marginLeft = isset($attributes['marginLeft']) ? intval($attributes['marginLeft']) : 0;
+        $alignment = isset($attributes['alignment']) ? esc_attr($attributes['alignment']) : 'center';
+        $linkUrl = isset($attributes['linkUrl']) ? esc_url($attributes['linkUrl']) : '';
+        $linkTarget = isset($attributes['linkTarget']) && $attributes['linkTarget'] ? '_blank' : '_self';
+
+        if ( empty($imageUrl) ) {
+            return '';
+        }
+
+        // Build image styles
+        $image_styles = array();
+        $image_styles[] = 'width: ' . $imageWidth . '%';
+        $image_styles[] = 'height: ' . ($imageHeight === 'auto' ? 'auto' : $imageHeight . 'px');
+        $image_styles[] = 'object-fit: ' . $objectFit;
+        $image_styles[] = 'display: block';
+        
+        if ($borderRadius) {
+            $image_styles[] = 'border-radius: ' . $borderRadius . 'px';
+        }
+        if ($borderWidth) {
+            $image_styles[] = 'border-width: ' . $borderWidth . 'px';
+            $image_styles[] = 'border-style: ' . $borderStyle;
+        }
+        if ($borderColor) {
+            $image_styles[] = 'border-color: ' . $borderColor;
+        }
+        if ($boxShadow) {
+            $image_styles[] = 'box-shadow: ' . $boxShadow;
+        }
+
+        $image_style = implode('; ', $image_styles);
+
+        // Build container styles
+        $container_styles = array();
+        $container_styles[] = 'text-align: ' . $alignment;
+        
+        if ($marginTop) {
+            $container_styles[] = 'margin-top: ' . $marginTop . 'px';
+        }
+        if ($marginRight) {
+            $container_styles[] = 'margin-right: ' . $marginRight . 'px';
+        }
+        if ($marginBottom) {
+            $container_styles[] = 'margin-bottom: ' . $marginBottom . 'px';
+        }
+        if ($marginLeft) {
+            $container_styles[] = 'margin-left: ' . $marginLeft . 'px';
+        }
+
+        $container_style = implode('; ', $container_styles);
+
+        // Build output
+        ob_start();
+        ?>
+        <div class="wp-block-create-block-grid-image">
+            <div class="grid-image-container" style="<?php echo esc_attr( $container_style ); ?>">
+                <?php if ( $linkUrl ) : ?>
+                    <a href="<?php echo $linkUrl; ?>" target="<?php echo $linkTarget; ?>" <?php echo ($linkTarget === '_blank') ? 'rel="noopener noreferrer"' : ''; ?>>
+                        <img src="<?php echo $imageUrl; ?>" alt="<?php echo $imageAlt; ?>" style="<?php echo esc_attr( $image_style ); ?>" />
+                    </a>
+                <?php else : ?>
+                    <img src="<?php echo $imageUrl; ?>" alt="<?php echo $imageAlt; ?>" style="<?php echo esc_attr( $image_style ); ?>" />
+                <?php endif; ?>
+            </div>
         </div>
         <?php
         return ob_get_clean();

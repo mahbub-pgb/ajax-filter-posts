@@ -1,0 +1,1 @@
+{"version":3,"file":"grid-image/style-index.css","mappings":";;;AAEE;EACC;EACA;AADH,C","sources":["webpack://grid-master/./src/grid-image/style.scss"],"sourcesContent":[".wp-block-create-block-grid-image {\r\n\t.grid-image-container {\r\n\t\timg {\r\n\t\t\tmax-width: 100%;\r\n\t\t\theight: auto;\r\n\t\t}\r\n\t}\r\n}"],"names":[],"ignoreList":[],"sourceRoot":""}

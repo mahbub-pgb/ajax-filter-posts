@@ -18,6 +18,7 @@
     "@wordpress/scripts": "^31.1.0"
   },
   "dependencies": {
+    "@wordpress/icons": "^11.3.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1"
   }

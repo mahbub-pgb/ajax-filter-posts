@@ -131,6 +131,104 @@ return array(
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css'
 	),
+	'grid-image' => array(
+		'$schema' => 'https://schemas.wp.org/trunk/block.json',
+		'apiVersion' => 3,
+		'name' => 'create-block/grid-image',
+		'version' => '1.0.0',
+		'title' => 'Grid Image',
+		'category' => 'grid',
+		'icon' => 'format-image',
+		'description' => 'Add images with advanced styling options',
+		'keywords' => array(
+			'image',
+			'photo',
+			'picture',
+			'grid'
+		),
+		'supports' => array(
+			'html' => false,
+			'align' => true
+		),
+		'textdomain' => 'grid-master',
+		'editorScript' => 'file:./index.js',
+		'editorStyle' => 'file:./index.css',
+		'style' => 'file:./style-index.css',
+		'attributes' => array(
+			'imageUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'imageId' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'imageAlt' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'imageWidth' => array(
+				'type' => 'number',
+				'default' => 100
+			),
+			'imageHeight' => array(
+				'type' => 'string',
+				'default' => 'auto'
+			),
+			'objectFit' => array(
+				'type' => 'string',
+				'default' => 'cover'
+			),
+			'borderRadius' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'borderWidth' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'borderColor' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'borderStyle' => array(
+				'type' => 'string',
+				'default' => 'solid'
+			),
+			'boxShadow' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'marginTop' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginRight' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginBottom' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'marginLeft' => array(
+				'type' => 'number',
+				'default' => 0
+			),
+			'alignment' => array(
+				'type' => 'string',
+				'default' => 'center'
+			),
+			'linkUrl' => array(
+				'type' => 'string',
+				'default' => ''
+			),
+			'linkTarget' => array(
+				'type' => 'boolean',
+				'default' => false
+			)
+		)
+	),
 	'grid-title' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,

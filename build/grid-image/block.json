@@ -1,0 +1,98 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "create-block/grid-image",
+  "version": "1.0.0",
+  "title": "Grid Image",
+  "category": "grid",
+  "icon": "format-image",
+  "description": "Add images with advanced styling options",
+  "keywords": [
+    "image",
+    "photo",
+    "picture",
+    "grid"
+  ],
+  "supports": {
+    "html": false,
+    "align": true
+  },
+  "textdomain": "grid-master",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "attributes": {
+    "imageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "imageId": {
+      "type": "number",
+      "default": 0
+    },
+    "imageAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "imageWidth": {
+      "type": "number",
+      "default": 100
+    },
+    "imageHeight": {
+      "type": "string",
+      "default": "auto"
+    },
+    "objectFit": {
+      "type": "string",
+      "default": "cover"
+    },
+    "borderRadius": {
+      "type": "number",
+      "default": 0
+    },
+    "borderWidth": {
+      "type": "number",
+      "default": 0
+    },
+    "borderColor": {
+      "type": "string",
+      "default": ""
+    },
+    "borderStyle": {
+      "type": "string",
+      "default": "solid"
+    },
+    "boxShadow": {
+      "type": "string",
+      "default": ""
+    },
+    "marginTop": {
+      "type": "number",
+      "default": 0
+    },
+    "marginRight": {
+      "type": "number",
+      "default": 0
+    },
+    "marginBottom": {
+      "type": "number",
+      "default": 0
+    },
+    "marginLeft": {
+      "type": "number",
+      "default": 0
+    },
+    "alignment": {
+      "type": "string",
+      "default": "center"
+    },
+    "linkUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "linkTarget": {
+      "type": "boolean",
+      "default": false
+    }
+  }
+}
