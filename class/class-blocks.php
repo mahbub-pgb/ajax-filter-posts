@@ -67,7 +67,7 @@ class Blocks {
         $output = '';
 
         foreach ( $blocks as $block ) {
-            if ( $block['blockName'] === 'create-block/grid-style' ) {
+            if ( $block['blockName'] === 'create-block/grid-title' ) {
                 // Get inner blocks and render them properly
                 $inner_blocks_html = '';
                 if ( !empty($block['innerBlocks']) ) {
@@ -246,15 +246,15 @@ class Blocks {
         // Build output
         ob_start();
         ?>
-        <div class="wp-block-create-block-grid-style">
-            <section class="grid-style-section" style="<?php echo esc_attr( $section_style ); ?>">
+        <div class="wp-block-create-block-grid-title">
+            <section class="grid-title-section" style="<?php echo esc_attr( $section_style ); ?>">
                 <?php if (!empty($section_title)) : ?>
                     <h2 class="section-title" style="<?php echo esc_attr( $title_style ); ?>">
                         <?php echo $section_title; ?>
                     </h2>
                 <?php endif; ?>
                 
-                <div class="grid-style-content">
+                <div class="grid-title-content">
                     <?php echo $content; ?>
                 </div>
             </section>

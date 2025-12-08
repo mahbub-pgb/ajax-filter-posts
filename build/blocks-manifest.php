@@ -131,10 +131,10 @@ return array(
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css'
 	),
-	'grid-style' => array(
+	'grid-title' => array(
 		'$schema' => 'https://schemas.wp.org/trunk/block.json',
 		'apiVersion' => 3,
-		'name' => 'create-block/grid-style',
+		'name' => 'create-block/grid-title',
 		'version' => '0.1.0',
 		'title' => 'Grid Style',
 		'category' => 'grid',
